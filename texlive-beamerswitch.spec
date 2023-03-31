@@ -1,6 +1,6 @@
 Name:		texlive-beamerswitch
 Version:	64182
-Release:	1
+Release:	2
 Summary:	Convenient mode selection in Beamer documents
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/beamerswitch
