@@ -3,7 +3,7 @@ Version:	64182
 Release:	2
 Summary:	Convenient mode selection in Beamer documents
 Group:		Publishing
-URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/beamerswitch
+URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/beamerswitch
 License:	lppl1.3c
 Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/beamerswitch.r%{version}.tar.xz
 Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/beamerswitch.doc.r%{version}.tar.xz
