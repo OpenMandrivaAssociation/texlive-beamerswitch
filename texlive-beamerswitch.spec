@@ -13,7 +13,7 @@ Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/beamerswitch.r%{
 Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/beamerswitch.doc.r%{tl_revision}.tar.xz
 Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/beamerswitch.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-Requires(pre):	texlive-tlpkg
+BuildSystem:	texlive
 Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
@@ -25,51 +25,3 @@ provided), and a transcript or set of notes using the article class. The
 class provides a variety of handout layouts, and allows the mode to be
 chosen from the command line (without changing the document itself).
 
-%prep
-%setup -q -c -a1 -a2
-rm -rf tlpkg
-if [ -d RELOC ]; then
-	cp -a RELOC/. .
-	rm -rf RELOC
-fi
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_datadir}/texmf-dist
-# Flat tlnet layout: tex/ doc/ source/ fonts/ ... -> texmf-dist/
-if [ -d texmf-dist ]; then
-	cp -a texmf-dist/. %{buildroot}%{_datadir}/texmf-dist/
-elif [ -d texmf ]; then
-	mkdir -p %{buildroot}%{_datadir}/texmf
-	cp -a texmf/. %{buildroot}%{_datadir}/texmf/
-else
-	for d in * .[!.]* ..?*; do
-		[ -e "$d" ] || continue
-		case "$d" in tlpkg|RELOC) continue ;; esac
-		cp -a "$d" %{buildroot}%{_datadir}/texmf-dist/
-	done
-fi
-rm -rf %{buildroot}%{_datadir}/texmf-dist/tlpkg
-
-%files
-%dir %{_datadir}/texmf-dist
-%dir %{_datadir}/texmf-dist/doc
-%dir %{_datadir}/texmf-dist/source
-%dir %{_datadir}/texmf-dist/tex
-%dir %{_datadir}/texmf-dist/doc/latex
-%dir %{_datadir}/texmf-dist/source/latex
-%dir %{_datadir}/texmf-dist/tex/latex
-%dir %{_datadir}/texmf-dist/doc/latex/beamerswitch
-%dir %{_datadir}/texmf-dist/source/latex/beamerswitch
-%dir %{_datadir}/texmf-dist/tex/latex/beamerswitch
-%doc %{_datadir}/texmf-dist/doc/latex/beamerswitch/README.md
-%doc %{_datadir}/texmf-dist/doc/latex/beamerswitch/beamerswitch-example-article.pdf
-%doc %{_datadir}/texmf-dist/doc/latex/beamerswitch/beamerswitch-example-handout.pdf
-%doc %{_datadir}/texmf-dist/doc/latex/beamerswitch/beamerswitch-example-trans.pdf
-%doc %{_datadir}/texmf-dist/doc/latex/beamerswitch/beamerswitch-example.pdf
-%doc %{_datadir}/texmf-dist/doc/latex/beamerswitch/beamerswitch-example.tex
-%doc %{_datadir}/texmf-dist/doc/latex/beamerswitch/beamerswitch.pdf
-%doc %{_datadir}/texmf-dist/source/latex/beamerswitch/Makefile
-%doc %{_datadir}/texmf-dist/source/latex/beamerswitch/beamerswitch.dtx
-%{_datadir}/texmf-dist/tex/latex/beamerswitch/beamerswitch.cls
